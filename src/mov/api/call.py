@@ -19,7 +19,7 @@ def list2df(load_dt='20120101'):
     return df
 
 def req2list(load_dt='20120101'):
-    _, data = req()
+    _, data = req(load_dt)
     l = data['boxOfficeResult']['dailyBoxOfficeList']
     return l
 
