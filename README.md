@@ -13,7 +13,14 @@ $ pip install pip install git+https://github.com/hahahellooo/mov.git@
 ```bash
 $ git clone <URL>
 $ cd <DIR>
+$ source .venv/bin/activate
+$ pytest
+
 $ # option
 $ pdm venv create
-$ source .venv/bin/activate
+```
+
+### setting env
+```bash
+$ cat ~/.zshrc | tail -n 3
 ```
