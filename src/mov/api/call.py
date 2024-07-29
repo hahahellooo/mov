@@ -7,7 +7,7 @@ def list2df():
     df = pd.DataFrame(l)
     return df
 
-def req2list() -> list:
+def req2list():
     _, data = req()
     l = data['boxOfficeResult']['dailyBoxOfficeList']
     return l
