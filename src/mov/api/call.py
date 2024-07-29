@@ -3,8 +3,9 @@ import os
 import pandas as pd
 
 
-def save2df():
-    df = list2df()
+def save2df(load_dt='20120101'):
+    """airflow 호출 지점"""
+    df = list2df(load_dt)
     # df 에 ldad_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식으로)
     # 아래 파일 저장시 load_dt 기준으로 파티셔닝
     df['load_dt'] = '20120101'
@@ -12,12 +13,12 @@ def save2df():
     print(df.head(5))
     return df
 
-def list2df():
-    l = req2list()
+def list2df(load_dt='20120101'):
+    l = req2list(load_dt)
     df = pd.DataFrame(l)
     return df
 
-def req2list():
+def req2list(load_dt='20120101'):
     _, data = req()
     l = data['boxOfficeResult']['dailyBoxOfficeList']
     return l
@@ -27,8 +28,8 @@ def get_key():
     key = os.getenv('MOVIE_API_KEY')
     return key
 
-def req(dt="20120101"):
-    url = gen_url(dt)
+def req(load_dt="20120101"):
+    url = gen_url(load_dt)
     r = requests.get(url)
     code = r.status_code
     data = r.json()
