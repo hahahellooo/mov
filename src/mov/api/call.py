@@ -2,6 +2,8 @@ import requests
 import os
 import pandas as pd
 
+def echo(yaho):
+    return yaho
 
 def save2df(load_dt='20120101'):
     """airflow 호출 지점"""
