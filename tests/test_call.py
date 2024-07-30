@@ -1,14 +1,23 @@
-from src.mov.api.call import gen_url, req, get_key, req2list, list2df, save2df, echo
+from src.mov.api.call import gen_url, req, get_key, req2list, list2df, save2df, echo, apply_type2df
 import pandas as pd
+
+def test_apply_type2df():
+    df = apply_type2df()
+    assert isinstance(df, pd.DataFrame)
+    assert str(df['rnum'].dtype) in ['int64']
+    assert str(df['rank'].dtype) in ['int64']
+    num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
+    for c in num_cols:
+        assert df[c].dtype in ['float64', 'int64']
+
+def test_save2df():
+    df = save2df()
+    assert isinstance(df, pd.DataFrame)
+    assert 'load_dt' in df.columns
 
 def test_echo():
     r = echo("hello")
     assert r == "hello"
-
-def test_save2df():
-    df = save2df(load_dt='20241231')   
-    assert isinstance(df, pd.DataFrame)
-    assert 'load_dt' in df.columns
 
 def test_list2df():
     df = list2df()

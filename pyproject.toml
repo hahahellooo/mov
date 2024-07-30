@@ -1,6 +1,6 @@
 [project]
 name = "mov"
-version = "0.2.2"
+version = "0.2.3"
 description = "영화진흥위원회 영화순위 데이터 처리"
 authors = [
     {name = "hahahellooo", email = "hahahello777@gmail.com"},

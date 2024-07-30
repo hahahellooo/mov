@@ -5,6 +5,17 @@ import pandas as pd
 def echo(yaho):
     return yaho
 
+def apply_type2df(load_dt="20120101", path="~/tmp/test_parquet"):
+    df = pd.read_parquet(f'{path}/load_dt={load_dt}')
+    df['rnum'] = pd.to_numeric(df['rnum'])
+    df['rank'] = pd.to_numeric(df['rank'])
+    num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
+    #for col_name in num_cols: 결과값이 같다
+    #    df[col_name] = pd.to_numeric(df[col_name])
+    df[num_cols] = df[num_cols].apply(pd.to_numeric)
+    
+    return df
+
 def save2df(load_dt='20120101'):
     """airflow 호출 지점"""
     df = list2df(load_dt)
