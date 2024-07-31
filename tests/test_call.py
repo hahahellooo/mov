@@ -1,6 +1,11 @@
 from src.mov.api.call import gen_url, req, get_key, req2list, list2df, save2df, echo, apply_type2df
 import pandas as pd
 
+def test_save2df():
+    df = save2df()
+    assert isinstance(df, pd.DataFrame)
+    assert 'load_dt' in df.columns
+
 def test_apply_type2df():
     df = apply_type2df()
     assert isinstance(df, pd.DataFrame)
@@ -9,11 +14,6 @@ def test_apply_type2df():
     num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
     for c in num_cols:
         assert df[c].dtype in ['float64', 'int64']
-
-def test_save2df():
-    df = save2df()
-    assert isinstance(df, pd.DataFrame)
-    assert 'load_dt' in df.columns
 
 def test_echo():
     r = echo("hello")
@@ -43,7 +43,10 @@ def test_유알엘테스트():
     url = gen_url()
     assert "http" in url
     assert "kobis" in url
-
+    
+    d = {"multiMovieYn": "N"}
+    url = gen_url(req_val = d)
+    assert "multiMovieYn" in url
 
 def test_req():
     code, _ = req()
