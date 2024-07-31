@@ -27,12 +27,12 @@ def save2df(load_dt='20120101', url_param={}):
     return df
 
 def list2df(load_dt='20120101', url_param={}):
-    l = req2list(load_dt, url_param={})
+    l = req2list(load_dt, url_param=url_param)
     df = pd.DataFrame(l)
     return df
 
 def req2list(load_dt='20120101', url_param={}):
-    _, data = req(load_dt, url_param={})
+    _, data = req(load_dt, url_param=url_param)
     l = data['boxOfficeResult']['dailyBoxOfficeList']
     return l
 
@@ -42,7 +42,7 @@ def get_key():
     return key
 
 def req(load_dt="20120101", url_param={}):
-    url = gen_url(load_dt, url_param={})
+    url = gen_url(load_dt, url_param=url_param)
     r = requests.get(url)
     code = r.status_code
     data = r.json()
